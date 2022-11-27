@@ -106,6 +106,7 @@
 			$query = "
 					SELECT SUM(total) as grandtotal
 					FROM tbl_order
+					WHERE status != 'cancelled'
 					";
 		}
 
@@ -115,7 +116,7 @@
 					SELECT SUM(total) as grandtotal
 					FROM tbl_order
 
-					WHERE order_date > DATE_SUB(NOW(), INTERVAL 1 ".$duration.")
+					WHERE order_date > DATE_SUB(NOW(), INTERVAL 1 ".$duration.") AND status != 'cancelled'
 					";
 		}
 

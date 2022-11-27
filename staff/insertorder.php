@@ -31,9 +31,8 @@
 
 				updateTotal($currentOrderID);
 
-				//completed insert current order
-				header("Location: index.php");
-				exit();
+				//print reciept
+				echo "<script>window.open('print.php?id=$currentOrderID');window.location.replace('index.php');</script>";
 			}
 
 			else {
