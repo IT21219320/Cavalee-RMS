@@ -5,9 +5,14 @@
 <html>
     <head>
         <title>Cavalee | Reciept</title>
+        <link href="css/printstyle.css" rel="stylesheet">
     </head>
     <body>
-        <hr>
+        <center>
+            <img src="../image/LOGO-Orig.png" height="60px" width="auto">
+            <P>Street Food<br>162/24/1 Pittugala, Malabe<br>+94 710 622 622</P>
+        </center>
+        
         <table border="0">
             <tr>
                 <th>Item</th>
@@ -28,16 +33,17 @@
                     $tot = $row['price'] * $row['quantity'];
                     $total += $tot;
                     echo "<tr>
-                            <td>". $row['menuName'] ." : ". $row['menuItemName'] ."</td>
-                            <td>". $row['price'] ."</td>
-                            <td>". $row['quantity'] ."</td>
-                            <td>". $tot .".00</td>
+                            <td id='printMenuItem'>". $row['menuName'] ." : ". $row['menuItemName'] ."</td>
+                            <td id='printPrice'>". $row['price'] ."</td>
+                            <td id='printQuantity'>". $row['quantity'] ."</td>
+                            <td id='printTotal'>". $tot .".00</td>
                           </tr>";
                 }
-                echo "<tr><td colspan = '3'><b>Grand Total</b></td><td>". $total .".00</td></tr>";
+                echo "<tr><td colspan = '3'><br><b>Grand Total</b></td><td>". $total .".00</td></tr>";
             ?>
-        </table>   
-        <hr> 
+        </table>
+        <br>
+        <center><strong><h4>Thank You. Come Again!</h4></strong></center>
         <script>
             window.print();
         </script>

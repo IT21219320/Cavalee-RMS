@@ -1,0 +1,44 @@
+img{
+    margin: -20px 0 0 0;
+    padding: 0;
+}
+
+p{
+    margin: -6px 0 10px 0;
+    padding: 0;
+}
+
+th{
+    text-align: center;
+    padding: 4px 10px;
+}
+
+td{
+    padding: 2px 10px;
+}
+
+#printMenuItem{
+    text-align: left;
+}
+
+#printPrice{
+    text-align: center;
+}
+
+#printQuantity{
+    text-align: center;
+}
+
+#printTotal{
+    text-align: right;
+}
+
+@media print {
+    @page {margin: 0; size: 300px 500px;}
+    body {font-size: 10px; margin: 0.5cm;}
+}
+
+/*
+    Get HTML DOM height and pass into @page Size as height.
+    Ref: https://stackoverflow.com/questions/294250/how-do-i-retrieve-an-html-elements-actual-width-and-height/294273#294273
+*/
