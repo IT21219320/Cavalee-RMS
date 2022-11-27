@@ -9,9 +9,6 @@ For admin:
 For staff:
 check database
 
-
-
-
 ### Notes
 1. This is not ready for production.
 2. All staff created have same default password : abc123
