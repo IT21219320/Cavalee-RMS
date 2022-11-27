@@ -168,7 +168,7 @@
                         ON OD.itemID = MI.itemID
                         LEFT JOIN tbl_menu M
                         ON MI.menuID = M.menuID
-                        ";
+                        WHERE O.status != 'cancelled'";
 
                       if ($orderResult = $sqlconnection->query($displayOrderQuery)) {
                           
