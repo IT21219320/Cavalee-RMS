@@ -1,5 +1,5 @@
-# Food-Ordering-System
-Food Ordering System is a web application that manages the restaurant menu order between POS and Chef.
+# Restaurant-Order-Management-System
+Restaurant Order Management System is a web application that manages the restaurant menu order between POS and Kitchen.
 
 ## Login Details
 For admin:
