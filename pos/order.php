@@ -73,30 +73,11 @@
           </a>
         </li>
 
-        
-        <?php
-
-          if ($_SESSION['user_role'] == "POS") {
-            echo '
             <li class="nav-item">
               <a class="nav-link" href="order.php">
                 <i class="fas fa-fw fa-book"></i>
                 <span>Order</span></a>
             </li>
-          ';
-          }
-
-          if ($_SESSION['user_role'] == "Chef") {
-            echo '
-            <li class="nav-item">
-              <a class="nav-link" href="kitchen.php">
-                <i class="fas fa-fw fa-utensils"></i>
-                <span>Kitchen</span></a>
-            </li>
-            ';
-          }
-
-        ?>
 
         <li class="nav-item">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">

@@ -23,7 +23,7 @@
 
 		else {
 				//handle
-				echo "someting wrong";
+				echo "something wrong";
 				echo $sqlconnection->error;
 
 		}

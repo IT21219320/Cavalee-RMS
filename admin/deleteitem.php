@@ -24,7 +24,7 @@
 
 		else {
 				//handle
-				echo "someting wong";
+				echo "something wrong";
 				echo $sqlconnection->error;
 
 		}
