@@ -21,14 +21,14 @@
 					} 
 				else {
 						//handle
-						echo "someting wrong";
+						echo "something wrong";
 						echo $sqlconnection->error;
 					}
 				} 
 
 			else {
 					//handle
-					echo "someting wrong";
+					echo "something wrong";
 					echo $sqlconnection->error;
 				}
 			//echo "<script>alert('{$del_menuID} & {$del_itemID}')</script>";

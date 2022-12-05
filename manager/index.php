@@ -4,7 +4,7 @@
   if((!isset($_SESSION['uid']) && !isset($_SESSION['username']) && isset($_SESSION['user_level'])) ) 
     header("Location: login.php");
 
-  if($_SESSION['user_level'] != "admin")
+  if($_SESSION['user_level'] != "staff")
     header("Location: login.php");
 
   // echo $_SESSION['uid'];
@@ -24,7 +24,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Cavalee | Admin Dashboard</title>
+    <title>Cavalee | Manager Dashboard</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -85,13 +85,6 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="staff.php">
-            <i class="fas fa-fw fa-user-circle"></i>
-            <span>Staff</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
           <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-fw fa-power-off"></i>
             <span>Logout</span>
@@ -113,7 +106,7 @@
           </ol>
 
           <!-- Page Content -->
-          <h1>Administrator Panel</h1>
+          <h1>Manager Panel</h1>
           <hr>
           <p>Overview of the system.</p>
 
@@ -145,7 +138,7 @@
             <div class="col-lg-4">
               <div class="card mb-3">
                 <div class="card-header">
-                  <i class="fas fa-chart-bar""></i>
+                  <i class="fas fa-chart-bar"></i>
                   Staff Availability</div>
                 <div class="card-body">
                   <table table class="table table-bordered text-center" width="100%" cellspacing="0">

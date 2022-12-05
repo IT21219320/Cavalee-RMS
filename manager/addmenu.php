@@ -12,7 +12,7 @@
 				header("Location: menu.php");
 			} else {
 				//handle
-				echo "someting wong";
+				echo "something wrong";
 			}
 		}
 

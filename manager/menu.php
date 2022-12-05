@@ -7,7 +7,7 @@
 	if((!isset($_SESSION['uid']) && !isset($_SESSION['username']) && isset($_SESSION['user_level'])) ) 
 		header("Location: login.php");
 
-	if($_SESSION['user_level'] != "admin")
+	if($_SESSION['user_level'] != "staff")
 		header("Location: login.php");
 ?>
 
@@ -80,13 +80,6 @@
           <a class="nav-link" href="sales.php">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Sales</span></a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="staff.php">
-            <i class="fas fa-fw fa-user-circle"></i>
-            <span>Staff</span>
-          </a>
         </li>
 
         <li class="nav-item">
@@ -362,7 +355,7 @@
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.min.js"></script>
+    <script src="js/sb-staff.min.js"></script>
 
     <script>
     	//passing menuId to modal

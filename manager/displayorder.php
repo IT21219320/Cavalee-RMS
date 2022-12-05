@@ -5,7 +5,7 @@
 	if((!isset($_SESSION['uid']) && !isset($_SESSION['username']) && isset($_SESSION['user_level'])) ) 
 		header("Location: login.php");
 
-	if($_SESSION['user_level'] != "admin")
+	if($_SESSION['user_level'] != "staff")
 		header("Location: login.php");
 
 	if(empty($_GET['cmd'])) 
