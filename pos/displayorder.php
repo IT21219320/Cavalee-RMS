@@ -124,18 +124,37 @@
 	//display current ready order list in staff index
 	if ($_GET['cmd'] == 'currentready') {
 
-		$latestReadyQuery = "SELECT orderID FROM tbl_order WHERE status IN ( 'finish','ready') ";
+		$latestReadyQuery = "SELECT SUM(total) as grandtotal
+		FROM tbl_order
+		WHERE order_date > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+
+		$total = 0;
 
 		if ($result = $sqlconnection->query($latestReadyQuery)) {
-
-			if ($result->num_rows == 0) {
-				echo "<tr><td class='text-center'>No order ready to serve. </td></tr>";
+	
+			while ($res = $result->fetch_array(MYSQLI_ASSOC)) {
+				$total+=$res['grandtotal'];
 			}
 
-            while($latestOrder = $result->fetch_array(MYSQLI_ASSOC)) {
-            	echo "<tr><td><i class='fas fa-bullhorn' style='color:green;'></i><b> Order #".$latestOrder['orderID']."</b> ready to serve.<a href='editstatus.php?orderID=".$latestOrder['orderID']."'><i class='fas fa-check float-right'></i></a></td></tr>";
-            }
-        }
+			echo "<!-- small box -->
+					<div class='small-box bg-red card m-3'>
+					<div class='inner'>
+						<h3>LKR ". $total ."</h3>
+
+						<p>Daily Sales</p>
+					</div>
+					<div class='icon'>
+						<img src='../image/sales-icon-15.png' alt='sales' id='salesIcon' class='crdIcon' width='50px'>
+					</div>
+					</div>";
+		}
+
+		else {
+
+			echo $sqlconnection->error;
+			return null;
+
+		}
 	}
 
 ?>

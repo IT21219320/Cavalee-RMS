@@ -85,17 +85,6 @@
             </li>
           ';
           }
-
-          if ($_SESSION['user_role'] == "Chef") {
-            echo '
-            <li class="nav-item">
-              <a class="nav-link" href="kitchen.php">
-                <i class="fas fa-fw fa-utensils"></i>
-                <span>Kitchen</span></a>
-            </li>
-            ';
-          }
-
         ?>
 
         <li class="nav-item">

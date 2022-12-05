@@ -56,10 +56,32 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <style>
+      .small-box{
+        width: 175px;
+        align-items: center;
+        flex-direction: row;
+      }
+      .bg-red{
 
+      }
+      .inner{
+
+      }
+      .inner h3{
+        font-size: 1.75rem;
+        margin-top: 1rem;
+        text-align: center;
+      }
+      .inner p{
+        margin: 0 1rem 1rem 1rem;
+      }
+    </style>
   </head>
 
   <body id="page-top">
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -103,17 +125,6 @@
             </li>
           ';
           }
-
-          if ($_SESSION['user_role'] == "Chef") {
-            echo '
-            <li class="nav-item">
-              <a class="nav-link" href="kitchen.php">
-                <i class="fas fa-fw fa-utensils"></i>
-                <span>Kitchen</span></a>
-            </li>
-            ';
-          }
-
         ?>
 
         <li class="nav-item">
@@ -146,11 +157,9 @@
             <div class="col-lg-9">
               <div class="card mb-3">
                 <div class="card-header">
-                  <i class="fas fa-utensils"></i>
-                  Latest Ready Order</div>
-                <div class="card-body">
-                	<table id="orderTable" class="table table-striped table-bordered width="100%" cellspacing="0">
-                	</table>
+                  <i class="fas fa-money-bill"></i>
+                  Latest POS Details</div>
+                <div id="orderTable">
                 </div>
                 <div class="card-footer small text-muted"><i>Refresh every 3 second(s)</i></div>
               </div>
@@ -238,7 +247,7 @@
     }
 
     //refresh order current list every 3 secs
-    setInterval(function(){ refreshTableOrder(); }, 3000);
+    //setInterval(function(){ refreshTableOrder(); }, 3000);
 
   </script>
 
