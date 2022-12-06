@@ -9,7 +9,7 @@
         $password = $sqlconnection->real_escape_string($_POST['password']);
 
         //sql statement
-        $sql = "SELECT * FROM tbl_staff WHERE username ='$username' AND password = '$password'";
+        $sql = "SELECT * FROM tbl_staff WHERE username ='$username' AND password = '$password' AND role = 'Manager'";
 
         if ($result = $sqlconnection->query($sql)) {
 
@@ -28,7 +28,7 @@
             }
 
             else {
-                echo "Wrong username or password.";
+                echo "Wrong username or password";
             }
 
         }
