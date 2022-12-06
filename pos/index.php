@@ -56,10 +56,60 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
+    <style>
+      .small-box{
+        width: max-content;
+        align-items: center;
+        flex-direction: row;
+        color: white;
+        box-shadow: 0 0 20px 0px #8d8d8d;
+        cursor: pointer;
+      }
+      .small-box:hover{
+        box-shadow: 0 0 10px 0px #8d8d8d;
+      }
+      .bg-green{
+        background: #019159;
+      }
+      .bg-red{
+        background: #e83260;
+      }
+      .bg-blue{
+        background: #26a8b5;
+      }
+      .inner{
 
+      }
+      .inner h3{
+        font-size: 1.75rem;
+        text-align: center;
+        margin: 1rem 0 8px 1rem;
+      }
+      .inner p{
+        margin-left: 1rem;
+      }
+      .icon{
+        font-size: 70px;
+        color: #00000059;
+        margin: 0 1rem;
+        font-weight: bold;
+      }
+      #orderTable{
+        display:flex;
+      }
+      #regIcon{
+        background: #00000059;
+        margin-bottom: 1rem;
+      }
+    </style>
   </head>
 
   <body id="page-top">
+    <script>
+      var amt;
+    </script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -121,17 +171,15 @@
           <!-- Page Content -->
           <h1>Staff Panel</h1>
           <hr>
-          <p>Manage staff work here.</p>
+          <p>Latest POS Details</p>
 
           <div class="row">
             <div class="col-lg-9">
               <div class="card mb-3">
                 <div class="card-header">
-                  <i class="fas fa-utensils"></i>
-                  Latest Ready Order</div>
-                <div class="card-body">
-                	<table id="orderTable" class="table table-striped table-bordered width="100%" cellspacing="0">
-                	</table>
+                  <i class="fas fa-money-bill"></i>
+                  Daily Details</div>
+                <div id="orderTable">
                 </div>
                 <div class="card-footer small text-muted"><i>Refresh every 3 second(s)</i></div>
               </div>
@@ -219,7 +267,19 @@
     }
 
     //refresh order current list every 3 secs
-    setInterval(function(){ refreshTableOrder(); }, 3000);
+    //setInterval(function(){ refreshTableOrder(); }, 3000);
+
+    function updateCash() {
+      let password = prompt("Please enter Admin/Manager Password");
+      $.ajax({
+           type: "POST",
+           url: 'updatecash.php',
+           data:{action:'call_this', pwd:password},
+           success:function(html) {
+             $("body").append(html);
+           }
+      });
+ }
 
   </script>
 
