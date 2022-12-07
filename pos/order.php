@@ -39,9 +39,38 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <style>
+      #tblItem{
+        display: none;
+      }
+      #back{
+        display: none;
+        width: max-content;
+        padding: 2px 10px 5px;
+        position: relative;
+        top: -11px;
+        left: -11px;
+        border-radius: 3px;
+        box-shadow: 0 0 5px #00000057;
+        background: beige;
+        cursor: pointer;
+      }
+      #back:hover{
+        box-shadow: 0 0 3px #00000057;
+      }
+      #searchItem {
+        margin-bottom: 10px;
+        width: 100%;
+        border-radius: 5px;
+        border: 0;
+        box-shadow: 0 0 3px 0px #00000063;
+        padding: 5px 10px;
+      }
+    </style>
+
   </head>
 
-  <body id="page-top">
+  <body id="page-top" class="sidebar-toggled">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
@@ -65,7 +94,7 @@
     <div id="wrapper">
 
       <!------------------ Sidebar ------------------->
-      <ul class="sidebar navbar-nav">
+      <ul class="sidebar navbar-nav toggled">
         <li class="nav-item">
           <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -112,7 +141,8 @@
                   <i class="fas fa-utensils"></i>
                   Take Order</div>
                 <div class="card-body">
-                  <table class="table table-bordered text-center" width="100%" cellspacing="0">
+                  <input type="text" name="searchItem" id="searchItem" onkeyup="searchItem()" value="" placeholder="Search Item">
+                  <table class="table table-bordered text-center" width="100%" cellspacing="0" id="itmCat">
                   	<tr>
                   	<?php 
 						$menuQuery = "SELECT * FROM tbl_menu";
@@ -138,11 +168,12 @@
 					?>
 					</tr>
                   </table>
+                  <div id="back" onclick="goback();"><</div>
                   <table id="tblItem" class="table table-bordered text-center" width="100%" cellspacing="0"></table>
 
                 <div id="qtypanel" hidden="">
         					Quantitiy : <input id="qty" required="required" type="number" min="1" max="50" name="qty" value="1" />
-        					<button class="btn btn-info" onclick = "insertItem()">Done</button>
+        					<button class="btn btn-info" onclick = "insertItem()">Add</button>
         					<br><br>
 				</div>
 
@@ -164,8 +195,12 @@
 								<th>Qty</th>
 								<th>Total (LKR)</th>
 							</tr>
+              <tr id="tblLast">
+                <td colspan='3'><b>Grand Total (LKR)</td>
+                <td id='grandTotal'></td>
+              </tr>
 						</table>
-						<input class="btn btn-success" type="submit" name="sentorder" value="Send">
+						<input class="btn btn-success" type="submit" name="sentorder" value="Check Out">
 					</form>
                 </div>
               </div>
@@ -228,21 +263,29 @@
 	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
 	<script>
+    var count = 1;
 		var currentItemID = null;
 
 		function displayItem (id) {
+      document.getElementById('tblItem').style.display = "table";
+      document.getElementById('back').style.display = "block";
+      document.getElementById('itmCat').style.display = "none";
+      document.getElementById('searchItem').style.display = "none";
 			$.ajax({
 				url : "displayitem.php",
-					type : 'POST',
-					data : { btnMenuID : id },
+        type : 'POST',
+        data : { btnMenuID : id },
 
-					success : function(output) {
-						$("#tblItem").html(output);
-					}
-				});
+        success : function(output) {
+          $("#tblItem").html(output);
+        }
+      });
 		}
 
 		function insertItem () {
+      document.getElementById('itmCat').style.display = "table";
+      document.getElementById('tblItem').innerHTML = "";
+      document.getElementById('back').style.display = "none";
 			var id = currentItemID;
 			var quantity = $("#qty").val();
 			$.ajax({
@@ -250,12 +293,14 @@
 					type : 'POST',
 					data : { 
 						btnMenuItemID : id,
-						qty : quantity 
+						qty : quantity,
+            cnt : count
 					},
 
 					success : function(output) {
-						$("#tblOrderList").append(output);
+						$("#tblLast").before(output);
 						$("#qtypanel").prop('hidden',true);
+            count++;
 					}
 				});
 
@@ -270,8 +315,42 @@
 		$(document).on('click','.deleteBtn', function(event){
 		        event.preventDefault();
 		        $(this).closest('tr').remove();
+            count--;
+            document.getElementById('grandTotal').innerHTML = "";
 		        return false;
 		    });
+
+    function goback(){
+      document.getElementById('itmCat').style.display = "table";
+      document.getElementById('tblItem').innerHTML = "";
+      document.getElementById('back').style.display = "none";
+      document.getElementById('qtypanel').style.display = "none";
+      document.getElementById('searchItem').style.display = "block";
+    }    
+
+    function searchItem(){
+      let val = document.getElementById('searchItem').value;
+
+      if(val != ""){
+        document.getElementById('tblItem').style.display = "table";
+        document.getElementById('back').style.display = "block";
+        document.getElementById('itmCat').style.display = "none";
+        document.getElementById('back').style.display = "none";
+        $.ajax({
+          url : "displayitem.php",
+          type : 'POST',
+          data : { itemName : val },
+
+          success : function(output) {
+            $("#tblItem").html(output);
+          }
+        });
+      }
+      else{
+        goback();
+      }
+      
+    }
 
 	</script>
 

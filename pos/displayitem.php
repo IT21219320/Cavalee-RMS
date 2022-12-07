@@ -46,21 +46,54 @@
 		$quantity = $sqlconnection->real_escape_string($_POST['qty']);
 
 		$menuItemQuery = "SELECT mi.itemID,mi.menuItemName,mi.price,m.menuName FROM tbl_menuitem mi LEFT JOIN tbl_menu m ON mi.menuID = m.menuID WHERE itemID = " . $menuItemID;
-
+		
 		if ($menuItemResult = $sqlconnection->query($menuItemQuery)) {
 			if ($menuItemResult->num_rows > 0) {
+				$i = $_POST['cnt'];
 				if ($menuItemRow = $menuItemResult->fetch_array(MYSQLI_ASSOC)) {
 					echo "
 					<tr>
 						<input type = 'hidden' name = 'itemID[]' value ='".$menuItemRow['itemID']."'/>
 						<td>".$menuItemRow['menuName']." : ".$menuItemRow['menuItemName']."</td>
-						<td>".$menuItemRow['price']."</td>
-						<td><input type = 'number' required='required' min='1' max='50' name = 'itemqty[]' width='10px' class='form-control' value ='".$quantity."'/></td>
-						<td>" . number_format((float)$menuItemRow['price'] * $quantity, 2, '.', '') . "</td>
-						<td><button class='btn btn-danger deleteBtn' type='button' onclick='deleteRow()'><i class='fas fa-times'></i></button></td>
+						<td id='itmprice".$i."'>".$menuItemRow['price']."</td>
+						<td><input type = 'number' required='required' min='1' max='50' name = 'itemqty[]' width='10px' class='form-control' value ='".$quantity."' onchange='calcTot(".$i.");' id='itmqty".$i."'/></td>
+						<td id='itm".$i."'>" . number_format((float)$menuItemRow['price'] * $quantity, 2, '.', '') . "</td>
+						<td><button class='btn btn-danger deleteBtn' type='button'><i class='fas fa-times'></i></button></td>
 					</tr>
 					";
 				}
+				echo "
+					
+					<script>
+						function calcGrndTot(){
+							var grandTot = 0;
+							for(let j = 1; j <= $i; j++){
+								let grndTot = parseInt(document.getElementById('itm'+j).innerHTML);
+								grandTot += grndTot;
+							}
+
+							document.getElementById('grandTotal').innerHTML = grandTot.toFixed(2);
+						}
+						
+						calcGrndTot();
+
+						function calcTot(itmno){
+							let id1 = 'itmqty' +  itmno;
+							let id2 = 'itm' +  itmno;
+							let id3 = 'itmprice' + itmno;
+
+							let quantity = parseInt(document.getElementById(id1).value);
+							let price = parseInt(document.getElementById(id3).innerHTML);
+							let total = quantity *price;
+
+							let decTot = total.toFixed(2);
+
+							document.getElementById(id2).innerHTML = decTot;
+							calcGrndTot();
+						}
+					</script>
+					";
+				$i++;
 			}
 
 			else {
@@ -70,6 +103,37 @@
 			
 		}
 
+	}
+
+	if (isset($_POST['itemName'])) {
+
+		$menuItemQuery = "SELECT itemID,menuItemName FROM tbl_menuitem WHERE menuItemName LIKE '%".$_POST['itemName']."%'";
+
+		if ($menuItemResult = $sqlconnection->query($menuItemQuery)) {
+			if ($menuItemResult->num_rows > 0) {
+				$counter = 0;
+				while($menuItemRow = $menuItemResult->fetch_array(MYSQLI_ASSOC)) {
+
+					if ($counter >=3) {
+						echo "</tr>";
+						$counter = 0;
+					}
+
+					if($counter == 0) {
+						echo "<tr>";
+					}
+
+					echo "<td><button style='margin-bottom:4px;white-space: normal;' class='btn btn-warning' onclick = 'setQty({$menuItemRow['itemID']})'>{$menuItemRow['menuItemName']}</button></td>";
+
+					$counter++;
+				}
+			}
+
+			else {
+				echo "<tr><td>No item in this menu</td></tr>";
+			}
+			
+		}
 	}
 
 	
