@@ -62,11 +62,11 @@
         align-items: center;
         flex-direction: row;
         color: white;
-        box-shadow: 0 0 20px 0px #8d8d8d;
+        box-shadow: 0 0 10px 0px #8d8d8dad;
         cursor: pointer;
       }
       .small-box:hover{
-        box-shadow: 0 0 10px 0px #8d8d8d;
+        box-shadow: 0 0 5px 0px #8d8d8dad;
       }
       .bg-green{
         background: #019159;
@@ -104,7 +104,7 @@
     </style>
   </head>
 
-  <body id="page-top">
+  <body id="page-top" class="sidebar-toggled">
     <script>
       var amt;
     </script>
@@ -133,7 +133,7 @@
     <div id="wrapper">
 
       <!------------------ Sidebar ------------------->
-      <ul class="sidebar navbar-nav">
+      <ul class="sidebar navbar-nav toggled">
         <li class="nav-item">
           <a class="nav-link" href="index.php">
             <i class="fas fa-fw fa-tachometer-alt"></i>
