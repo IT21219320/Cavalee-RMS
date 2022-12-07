@@ -43,6 +43,9 @@
       #tblItem{
         display: none;
       }
+      #qtypanel{
+        display: none;
+      }
       #back{
         display: none;
         width: max-content;
@@ -171,7 +174,7 @@
                   <div id="back" onclick="goback();"><</div>
                   <table id="tblItem" class="table table-bordered text-center" width="100%" cellspacing="0"></table>
 
-                <div id="qtypanel" hidden="">
+                <div id="qtypanel">
         					Quantitiy : <input id="qty" required="required" type="number" min="1" max="50" name="qty" value="1" />
         					<button class="btn btn-info" onclick = "insertItem()">Add</button>
         					<br><br>
@@ -282,6 +285,11 @@
       });
 		}
 
+    function setQty (id) {
+      currentItemID = id;
+      document.getElementById("qtypanel").style.display = "block";
+    }
+
 		function insertItem () {
       document.getElementById('itmCat').style.display = "table";
       document.getElementById('tblItem').innerHTML = "";
@@ -301,17 +309,12 @@
 
 					success : function(output) {
 						$("#tblLast").before(output);
-						$("#qtypanel").prop('hidden',true);
+      document.getElementById("qtypanel").style.display = "none";
             count++;
 					}
 				});
 
 			$("#qty").val(1);
-		}
-
-		function setQty (id) {
-			currentItemID = id;
-			$("#qtypanel").prop('hidden',false);
 		}
 
 		$(document).on('click','.deleteBtn', function(event){
