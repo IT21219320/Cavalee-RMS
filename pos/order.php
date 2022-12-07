@@ -286,6 +286,8 @@
       document.getElementById('itmCat').style.display = "table";
       document.getElementById('tblItem').innerHTML = "";
       document.getElementById('back').style.display = "none";
+      document.getElementById('searchItem').style.display = "block";
+      document.getElementById('searchItem').value = "";
 			var id = currentItemID;
 			var quantity = $("#qty").val();
 			$.ajax({
@@ -326,6 +328,7 @@
       document.getElementById('back').style.display = "none";
       document.getElementById('qtypanel').style.display = "none";
       document.getElementById('searchItem').style.display = "block";
+      document.getElementById('searchItem').value = "";
     }    
 
     function searchItem(){

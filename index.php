@@ -116,14 +116,12 @@
 				margin-top: 3%;
 			}
 
-			.footernote
-			{
+			.footernote {
 				display: block;
-				margin-top: 15%;
-				width: 30%;
-				height: auto;
-				margin-left: 35%;
-				margin-right: 35%;
+				width: 100%;
+				position: fixed;
+				top: 640px;
+				text-align: center;
 			}
 
 			p{
